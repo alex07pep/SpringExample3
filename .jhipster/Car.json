@@ -1,0 +1,77 @@
+{
+    "name": "Car",
+    "fields": [
+        {
+            "fieldName": "licensePlate",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "brand",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "model",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "productionYear",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "engineSize",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fuel",
+            "fieldType": "FuelType",
+            "fieldValues": "GASOLINE,DIESEL,ELECTRIC,HYBRID,OTHER"
+        },
+        {
+            "fieldName": "enginePower",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "engineTorque",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "trunkSize",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "car",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        }
+    ],
+    "changelogDate": "20200109214903",
+    "entityTableName": "car",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

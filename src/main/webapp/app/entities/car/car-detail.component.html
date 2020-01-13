@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="car">
+            <h2><span>Car</span> {{car.id}} - {{car.licensePlate}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>License Plate</span></dt>
+                <dd>
+                    <span>{{car.licensePlate}}</span>
+                </dd>
+                <dt><span>Brand</span></dt>
+                <dd>
+                    <span>{{car.brand}}</span>
+                </dd>
+                <dt><span>Model</span></dt>
+                <dd>
+                    <span>{{car.model}}</span>
+                </dd>
+                <dt><span>Production Year</span></dt>
+                <dd>
+                    <span>{{car.productionYear}}</span>
+                </dd>
+                <dt><span>Engine Size</span></dt>
+                <dd>
+                    <span>{{car.engineSize}}</span>
+                </dd>
+                <dt><span>Fuel</span></dt>
+                <dd>
+                    <span>{{car.fuel}}</span>
+                </dd>
+                <dt><span>Engine Power</span></dt>
+                <dd>
+                    <span>{{car.enginePower}}</span>
+                </dd>
+                <dt><span>Engine Torque</span></dt>
+                <dd>
+                    <span>{{car.engineTorque}}</span>
+                </dd>
+                <dt><span>Trunk Size</span></dt>
+                <dd>
+                    <span>{{car.trunkSize}}</span>
+                </dd>
+                <dt><span>Price</span></dt>
+                <dd>
+                    <span>{{car.price}}</span>
+                </dd>
+                <dt><span>User</span></dt>
+                <dd>
+                    {{car.user?.login}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/car', car.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div>
+    <h2 id="page-heading">
+        <span>Cars</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-car" [routerLink]="['/car/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Car
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="carsFiltered?.length === 0">
+        <span>No cars found</span>
+    </div>
+    <div class="table-responsive" *ngIf="carsFiltered?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+<!--            <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>-->
+            <th scope="col"  jhiSortBy="licensePlate"><span>License Plate</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="brand"><span>Brand</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="model"><span>Model</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="productionYear"><span>Production Year</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="engineSize"><span>Engine Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="fuel"><span>Fuel</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="enginePower"><span>Engine Power</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="engineTorque"><span>Engine Torque</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="trunkSize"><span>Trunk Size</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="price"><span>Price</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="user.login"><span>User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let car of carsFiltered ;trackBy: trackId">
+                <td><a [routerLink]="['/car', car.id, 'view' ]">{{car.licensePlate}}</a></td>
+<!--                <td>{{car.licensePlate}}</td>-->
+                <td>{{car.brand}}</td>
+                <td>{{car.model}}</td>
+                <td>{{car.productionYear}}</td>
+                <td>{{car.engineSize}}</td>
+                <td>{{car.fuel}}</td>
+                <td>{{car.enginePower}}</td>
+                <td>{{car.engineTorque}}</td>
+                <td>{{car.trunkSize}}</td>
+                <td>{{car.price}}</td>
+                <td>
+                    {{car.user?.login}}
+                </td>
+                <td *jhiHasAnyAuthority="'ROLE_ADMIN'"  class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/car', car.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/car', car.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(car)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        <label class="label" >Brand</label>
+        <input type="text" class="form-control" name="brandFilter" id="brandFilter" [(ngModel)]="brandFilter"/>
+    </div>
+    <div class="col-md-2">
+        <label class="label" >Engine Power</label>
+        <input type="number" class="form-control" name="enginePowerFilter" id="enginePowerFilter" [(ngModel)]="enginePowerFilter"/>
+    </div>
+    <div class="col-md-2">
+        <label class="label" >Trunk Size</label>
+        <input type="number" class="form-control" name="trunkSizeFilter" id="trunkSizeFilter" [(ngModel)]="trunkSizeFilter"/>
+    </div>
+    <button type="submit" (click)="filterCars()"
+            class="btn btn-primary btn-sm">
+        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+        <span class="d-none d-md-inline">Filter</span>
+    </button>
+    <button type="submit" (click)="resetFilter()"
+            class="btn btn-primary btn-sm">
+        <fa-icon [icon]="'times'"></fa-icon>
+        <span class="d-none d-md-inline">Reset Filter</span>
+    </button>
+</div>

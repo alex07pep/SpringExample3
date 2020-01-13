@@ -1,0 +1,29 @@
+// JDL definition for application 'TJ' generated with command 'jhipster export-jdl'
+entity Car {
+	licensePlate String required,
+    brand String required,
+    model String ,
+    productionYear Integer required,
+    engineSize Integer required,
+    fuel FuelType,
+    enginePower Integer,
+    engineTorque Integer,
+    trunkSize Integer,
+    price Integer
+}
+
+enum FuelType {
+  GASOLINE,
+  DIESEL,
+  ELECTRIC,
+  HYBRID,
+  OTHER
+}
+
+
+relationship ManyToOne {
+	Car{user(login)} to User
+}
+
+paginate Car with infinite-scroll
+service Car with serviceClass

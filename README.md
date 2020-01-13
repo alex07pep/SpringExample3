@@ -1,6 +1,6 @@
 # Tema3_Spring
 
-This application was generated using JHipster 6.5.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.5.1](https://www.jhipster.tech/documentation-archive/v6.5.1).
+A quick example of Monolithic app generated with JHipster 6.5.1
 
 ## Development
 

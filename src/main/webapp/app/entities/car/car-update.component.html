@@ -1,0 +1,118 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-car-heading">Create or edit a Car</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_licensePlate">License Plate</label>
+                    <input type="text" class="form-control" name="licensePlate" id="field_licensePlate"
+                           formControlName="licensePlate"/>
+                    <div *ngIf="editForm.get('licensePlate').invalid && (editForm.get('licensePlate').dirty || editForm.get('licensePlate').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('licensePlate').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_brand">Brand</label>
+                    <input type="text" class="form-control" name="brand" id="field_brand"
+                           formControlName="brand"/>
+                    <div *ngIf="editForm.get('brand').invalid && (editForm.get('brand').dirty || editForm.get('brand').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('brand').errors.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_model">Model</label>
+                    <input type="text" class="form-control" name="model" id="field_model"
+                           formControlName="model"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_productionYear">Production Year</label>
+                    <input type="number" class="form-control" name="productionYear" id="field_productionYear"
+                           formControlName="productionYear"/>
+                    <div *ngIf="editForm.get('productionYear').invalid && (editForm.get('productionYear').dirty || editForm.get('productionYear').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('productionYear').errors.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('productionYear')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_engineSize">Engine Size</label>
+                    <input type="number" class="form-control" name="engineSize" id="field_engineSize"
+                           formControlName="engineSize"/>
+                    <div *ngIf="editForm.get('engineSize').invalid && (editForm.get('engineSize').dirty || editForm.get('engineSize').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('engineSize').errors.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('engineSize')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fuel">Fuel</label>
+                    <select class="form-control" name="fuel" formControlName="fuel" id="field_fuel">
+                        <option value="GASOLINE">GASOLINE</option>
+                        <option value="DIESEL">DIESEL</option>
+                        <option value="ELECTRIC">ELECTRIC</option>
+                        <option value="HYBRID">HYBRID</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_enginePower">Engine Power</label>
+                    <input type="number" class="form-control" name="enginePower" id="field_enginePower"
+                           formControlName="enginePower"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_engineTorque">Engine Torque</label>
+                    <input type="number" class="form-control" name="engineTorque" id="field_engineTorque"
+                           formControlName="engineTorque"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_trunkSize">Trunk Size</label>
+                    <input type="number" class="form-control" name="trunkSize" id="field_trunkSize"
+                           formControlName="trunkSize"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_price">Price</label>
+                    <input type="number" class="form-control" name="price" id="field_price"
+                           formControlName="price"/>
+                </div>
+
+<!--                <div class="form-group">-->
+<!--                    <label class="form-control-label" for="field_user">User</label>-->
+<!--                    <select class="form-control" id="field_user" name="user" formControlName="user">-->
+<!--                        <option [ngValue]="null"></option>-->
+<!--                        <option [ngValue]="userOption.id === editForm.get('user').value?.id ? editForm.get('user').value : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

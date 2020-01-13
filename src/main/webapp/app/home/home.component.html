@@ -3,13 +3,23 @@
         <span class="hipster img-fluid rounded"></span>
     </div>
     <div class="col-md-9">
-        <h1 class="display-4">Welcome, Java Hipster!</h1>
-        <p class="lead">This is your homepage</p>
+        <div [ngSwitch]="isAuthenticated()">
+            <h1 class="display-4" *ngSwitchCase="false" >Welcome!</h1>
+            <h1 class="display-4" *ngSwitchCase="true" >Welcome, {{account.firstName}} {{account.lastName}}!</h1>
+            <p class="lead">This is your homepage</p>
+        </div>
 
         <div [ngSwitch]="isAuthenticated()">
             <div class="alert alert-success" *ngSwitchCase="true">
                 <span id="home-logged-message" *ngIf="account"
                    > You are logged in as user "{{account.login}}". </span>
+            </div>
+
+            <div *ngSwitchCase="true">
+                <button class="btn btn-dark col-md-2 " routerLink="car" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <fa-icon icon="car" fixedWidth="true"></fa-icon>
+                    <span>Check cars catalog</span>
+                </button>
             </div>
 
             <div class="alert alert-warning" *ngSwitchCase="false">
@@ -22,20 +32,5 @@
             </div>
         </div>
 
-        <p>
-            If you have any question on JHipster:
-        </p>
-
-        <ul>
-            <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-            <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a></li>
-            <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">JHipster bug tracker</a></li>
-            <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a></li>
-            <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-        </ul>
-
-        <p>
-            <span>If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-        </p>
     </div>
 </div>
